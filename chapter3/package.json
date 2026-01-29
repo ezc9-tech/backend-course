@@ -1,0 +1,22 @@
+{
+  "name": "chapter3",
+  "version": "1.0.0",
+  "description": "This is a backend using express and sqllite for a todolist app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch --env-file=.env --experimental-strip-types --experimental-sqlite ./src/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Elijah Zane Chapman",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

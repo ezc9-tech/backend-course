@@ -1,0 +1,40 @@
+###Test GET / route
+GET http://localhost:3000
+
+###Test POST /auth/register route
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "username": "example1",
+    "password": "123"
+}
+
+###Test POST /auth/login route
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+{
+    "username": "",
+    "password": ""
+}
+
+###Test GET /todos route
+GET http://localhost:3000/todos
+
+###Test POST /todos route
+POST http://localhost:3000/todos
+Content-Type: application/json
+{
+    
+}
+
+###Test PUT /todos:id route
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+{
+    "username": "",
+    "password": ""
+}
+
+###Test DELETE /todos:id route
+DELETE http://localhost:3000/auth/login
