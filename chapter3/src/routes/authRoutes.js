@@ -9,9 +9,12 @@ const authRoutes = express.Router()
 authRoutes.post('/register', (req, res) => {
     const {username, password} = req.body;
     
-    // if (db.exec(`SELECT * FROM users WHERE username = ${username}`)){
-    //     return res.status(400).json({message: "Username already taken"})
-    // }
+    const existingUserQuery = db.prepare(`SELECT * FROM users WHERE username = ?`)
+    const userExists = existingUserQuery.get(username)
+
+    if (userExists){
+        return res.status(400).json({message: "Username already taken"})
+    }
 
     const hashedPassword = bcrypt.hashSync(password, 8);
 
@@ -24,20 +27,29 @@ authRoutes.post('/register', (req, res) => {
         insertTodo.run(result.lastInsertRowid, defaultTodo)
 
         const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET_KEY, {expiresIn: '24h'})
-        res.status(201).json({message: "User has been created", token: token})
+        res.status(201).json(token)
     } catch (error) {
-        res.status(500).json({message: "Server Error", error})
+        res.sendStatus(503)
     }
 })
 
 authRoutes.post('/login', (req, res) => {
     const {username, password} = req.body;
-    
-    if (!db.exec(`SELECT * FROM users WHERE username = ${username}`)){
-        return res.status(400).json({message: "There is no user with that username"})
+    try {
+        const getUser = db.prepare(`SELECT * FROM users WHERE username = ?`)
+        const user = getUser.get(username)
+        if (!user){
+            return res.status(404).send({message: "There is no user with that username"})
+        }
+        const passwordIsValid = bcrypt.compareSync(password, user.password)
+        if(!passwordIsValid) {
+            return res.status(401).send({message: "Password is incorrect"})
+        }
+        const token = jwt.sign({id: user.id}, process.env.JWT_SECRET_KEY, {expiresIn: '24h'})
+        res.status(200).json(token)
+    } catch (error) {
+        res.sendStatus(503)
     }
-
-
 })
 
 export default authRoutes

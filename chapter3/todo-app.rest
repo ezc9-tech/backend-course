@@ -6,16 +6,17 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "username": "example1",
+    "username": "gilgamesh",
     "password": "123"
 }
 
 ###Test POST /auth/login route
 POST http://localhost:3000/auth/login
 Content-Type: application/json
+
 {
-    "username": "",
-    "password": ""
+    "username": "gilgamesh",
+    "password": "12345"
 }
 
 ###Test GET /todos route
