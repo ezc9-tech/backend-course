@@ -3,6 +3,7 @@ import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/authRoutes.js";
 import todoRoutes from "./routes/todoRoutes.js";
+import { authMiddleware } from "./middleware/authMiddleware.js";
 
 const app = express();
 
@@ -14,7 +15,7 @@ const __dirname = dirname(__filename)
 app.use(express.json())
 app.use(express.static(path.join(__dirname, '../public')))
 app.use('/auth', authRoutes);
-app.use('/todos', todoRoutes)
+app.use('/todos', authMiddleware, todoRoutes)
 
 app.get("/", (req, res) => {
     res.status(200).sendFile(path.join(__dirname, 'public', 'index.html'))

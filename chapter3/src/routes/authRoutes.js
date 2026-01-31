@@ -27,7 +27,7 @@ authRoutes.post('/register', (req, res) => {
         insertTodo.run(result.lastInsertRowid, defaultTodo)
 
         const token = jwt.sign({id: result.lastInsertRowid}, process.env.JWT_SECRET_KEY, {expiresIn: '24h'})
-        res.status(201).json(token)
+        res.status(201).json({token})
     } catch (error) {
         res.sendStatus(503)
     }
@@ -46,7 +46,7 @@ authRoutes.post('/login', (req, res) => {
             return res.status(401).send({message: "Password is incorrect"})
         }
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET_KEY, {expiresIn: '24h'})
-        res.status(200).json(token)
+        res.status(200).json({token})
     } catch (error) {
         res.sendStatus(503)
     }

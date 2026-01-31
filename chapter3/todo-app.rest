@@ -16,26 +16,31 @@ Content-Type: application/json
 
 {
     "username": "gilgamesh",
-    "password": "12345"
+    "password": "123"
 }
 
 ###Test GET /todos route
 GET http://localhost:3000/todos
-
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5ODMwNDM4LCJleHAiOjE3Njk5MTY4Mzh9.AACflyUdfW170D0ga_Abmmsvg_g5T4OSPQ3tYi60oPg
 ###Test POST /todos route
 POST http://localhost:3000/todos
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5ODI5OTU2LCJleHAiOjE3Njk5MTYzNTZ9.yiGQmuue1H-xAmYVSl_9BQLlcRzI5WtzeVh-Nx_aQ2g
 Content-Type: application/json
+
 {
-    
+    "task": "new task"
 }
 
 ###Test PUT /todos:id route
-POST http://localhost:3000/auth/login
+PUT http://localhost:3000/todos/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5ODI5OTU2LCJleHAiOjE3Njk5MTYzNTZ9.yiGQmuue1H-xAmYVSl_9BQLlcRzI5WtzeVh-Nx_aQ2g
 Content-Type: application/json
+
 {
-    "username": "",
-    "password": ""
+    "completed": 1
 }
 
 ###Test DELETE /todos:id route
-DELETE http://localhost:3000/auth/login
+DELETE http://localhost:3000/todos/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY5ODMwNDM4LCJleHAiOjE3Njk5MTY4Mzh9.AACflyUdfW170D0ga_Abmmsvg_g5T4OSPQ3tYi60oPg
+
